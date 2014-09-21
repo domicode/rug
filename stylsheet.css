@@ -1,0 +1,35 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.container {
+  width: 350px;
+  margin-left: 25%;
+}
+
+.line {
+  position: relative;
+  float: left
+}
+
+.box {
+  border: 2px solid black;
+  margin: 2px;
+  width: 30px;
+  height: 30px;
+  background: white;
+  position: relative;
+  float: left;
+}
+
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}
