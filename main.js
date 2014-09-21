@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+  newGame();
   $(".box").click(function(event) {
     var box = $(event.target);
     var col = color(box) || "";
@@ -14,6 +14,19 @@ $(document).ready(function() {
   });
 });
 
+function newGame() {
+  var times = 10
+  for (var i = 0; i < times; i++) {
+    var id = Math.floor((Math.random() * 100 + 1))
+    $("#"+id).addClass("red")
+  };
+  for (var i = 0; i < times; i++) {
+    var id = Math.floor((Math.random() * 100 + 1))
+    $("#"+id).addClass("blue")
+  };
+}
+
+// gest the color of the passed div, only works if the div has 2 classes
 function color(div) {
   var div = div
   var color = div.attr("class").split(" ")[1];
@@ -30,6 +43,7 @@ function gameLost(box) {
       box.attr("class") == box.next().attr("class")) {
     return true
   } 
+  // check there are 3 following colors in the row
   var id = parseInt($(box).attr("id"));
   var nextBox = $("#"+(id+10))
   var nextNextBox = $("#"+(id+20))
@@ -45,5 +59,4 @@ function gameLost(box) {
   } else {
     return false
   };
-
 }
