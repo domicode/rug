@@ -15,22 +15,44 @@ $(document).ready(function() {
 });
 
 function newGame() {
-  var times = 15;
-  for (var i = 0; i < times; i++) {
-    var id = Math.floor((Math.random() * 100 + 1));
-    $("#"+id).addClass("red");
+  var times = 101;
+  var colors = ["red", "blue"]
+  for (var i = 1; i < times; i += 2) {
+    var box = $("#"+i).addClass(colors[Math.floor(Math.random() * 2)]);
+    checkBoard(box)
   };
-  for (var i = 0; i < times; i++) {
-    var id = Math.floor((Math.random() * 100 + 1));
-    $("#"+id).addClass("blue");
+  for (var i = 2; i < times; i += 2) {
+    var box = $("#"+i).addClass(colors[Math.floor(Math.random() * 2)]);
+    checkBoard(box)
   };
+  for (var i = 1; i < times; i++) {
+    var box = $("#"+i);
+    checkBoard(box)
+  };
+}
+
+function checkBoard(box) {
+  var col = color(box)
+  if (gameLost(box)) {
+    if (col == "red") {
+      $(box).removeClass("red");
+      $(box).addClass("blue");
+    } else {
+      $(box).removeClass("blue");
+      $(box).addClass("red");        
+    }
+  }
 }
 
 // gest the color of the passed div, only works if the div has 2 classes
 function color(div) {
   var div = div;
-  var color = div.attr("class").split(" ")[1];
-  return color;
+  if (div.attr("class") != null ) {
+    var color = div.attr("class").split(" ")[1];
+    return color;
+  } else {
+    return false
+  }
 }
 
 function gameLost(box) {
